@@ -25,8 +25,8 @@ export default function FooterMap({
 
   if (!mounted) {
     return (
-      <div className="w-full h-[clamp(15rem,25vw,20rem)] overflow-hidden rounded-[clamp(1rem,1.5vw,1.25rem)] border border-[#13171B]/10 bg-[#F5F5F7] animate-pulse flex items-center justify-center">
-        <span className="text-xs uppercase tracking-widest text-[#13171B]/40 font-mono">
+      <div className="w-full h-[clamp(15rem,25vw,20rem)] overflow-hidden rounded-[clamp(1rem,1.5vw,1.25rem)] border border-[#F2F4F7]/10 bg-[#171A1F] animate-pulse flex items-center justify-center">
+        <span className="text-xs uppercase tracking-widest text-[#F2F4F7]/40 font-mono">
           Loading Map...
         </span>
       </div>
@@ -35,7 +35,7 @@ export default function FooterMap({
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <div className="w-full h-[clamp(15rem,25vw,20rem)] overflow-hidden rounded-[clamp(1rem,1.5vw,1.25rem)] border border-[#13171B]/10 bg-[#F5F5F7] shadow-sm relative group/map">
+      <div className="w-full h-[clamp(15rem,25vw,20rem)] overflow-hidden rounded-[clamp(1rem,1.5vw,1.25rem)] border border-[#F2F4F7]/10 bg-[#171A1F] shadow-sm relative group/map">
         {/* Floating Show/Hide Toggle Button on Map */}
         <button
           type="button"
@@ -46,7 +46,7 @@ export default function FooterMap({
           {popupOpen ? 'Hide' : 'Show'}
         </button>
 
-        <Map center={center} zoom={zoom} className="h-full w-full">
+        <Map center={center} zoom={zoom} theme="dark" className="h-full w-full">
           <MapControls position="top-right" />
 
           {/* Interactive Marker Pin */}
@@ -106,15 +106,15 @@ export default function FooterMap({
         </Map>
       </div>
 
-      <div className="mt-3 w-full flex items-center justify-between px-1 text-[0.72rem] tracking-wider uppercase text-[#13171B]/60">
-        <span className="font-medium text-[#13171B]/80 truncate max-w-[70%]">
+      <div className="mt-3 w-full flex items-center justify-between px-1 text-[0.72rem] tracking-wider uppercase text-[#F2F4F7]/60">
+        <span className="font-medium text-[#F2F4F7]/80 truncate max-w-[70%]">
           {locationName}
         </span>
         <a
           href={mapsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-semibold text-[#13171B] hover:text-blue-600 transition-colors shrink-0 ml-2"
+          className="font-semibold text-[#F2F4F7] hover:text-[#E3C77E] transition-colors shrink-0 ml-2"
         >
           Open in Maps &rarr;
         </a>

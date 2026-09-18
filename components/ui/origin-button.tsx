@@ -66,9 +66,9 @@ function hasTextContent(node: React.ReactNode): boolean {
 type OriginButtonProps = ButtonHTMLAttributesForMotion & {
   children?: React.ReactNode;
   loading?: boolean;
-  /** Fill color on hover/press. Defaults to Signal Blue #0030CF */
+  /** Fill color on hover/press. Defaults to champagne gold #E3C77E */
   fillColor?: string;
-  /** Text color when the fill covers the button. Defaults to #ffffff */
+  /** Text color when the fill covers the button. Defaults to ink #0B0D10 */
   fillTextColor?: string;
 };
 
@@ -83,8 +83,8 @@ const OriginButton = React.forwardRef<HTMLButtonElement, OriginButtonProps>(
       disabled = false,
       loading = false,
       type = "button",
-      fillColor = "#0030CF",
-      fillTextColor = "#ffffff",
+      fillColor = "#E3C77E",
+      fillTextColor = "#0B0D10",
       onBlur,
       onClick,
       onFocus,
@@ -198,9 +198,9 @@ const OriginButton = React.forwardRef<HTMLButtonElement, OriginButtonProps>(
         className={cn(
           componentThemeClassName,
           "relative inline-flex h-12 cursor-pointer touch-manipulation select-none items-center justify-center overflow-hidden rounded-xl px-8 font-medium text-[15px] tracking-[-0.02em]",
-          "bg-white text-[#13171B] shadow-sm",
+          "bg-[#0B0D10] text-[#F2F4F7] shadow-sm",
           "transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0030CF] focus-visible:ring-offset-2",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E3C77E] focus-visible:ring-offset-2",
           "disabled:pointer-events-none disabled:opacity-50",
           className
         )}
@@ -303,7 +303,7 @@ const OriginButton = React.forwardRef<HTMLButtonElement, OriginButtonProps>(
             scale: showFill && coverSize > 0 ? 1 : 0,
           }}
           aria-hidden
-          className="pointer-events-none absolute rounded-full bg-[#0030CF] z-0"
+          className="pointer-events-none absolute rounded-full bg-[#E3C77E] z-0"
           initial={{
             scale: 0,
           }}
@@ -319,9 +319,11 @@ const OriginButton = React.forwardRef<HTMLButtonElement, OriginButtonProps>(
         />
         <span
           className={cn(
-            "relative z-10 inline-flex items-center justify-center gap-2 transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-            showFill && "!text-white"
+            "relative z-10 inline-flex items-center justify-center gap-2 transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
           )}
+          // `fillTextColor` alone governs the filled state. A `!text-white`
+          // utility used to sit here, but its `!important` silently beat this
+          // inline style — harmless while both were white, wrong on a light fill.
           style={{
             color: showFill ? fillTextColor : undefined,
           }}

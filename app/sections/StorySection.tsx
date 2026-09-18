@@ -13,7 +13,7 @@ interface StorySectionProps {
 }
 
 const DEFAULT_QUOTE =
-  "This is not just a hackathon—it’s a place where normal rules don't apply and limits disappear. A space where builders, dreamers, and problem-solvers come together to celebrate the art of creation, share ideas, and turn code into lasting, real-world impact for a cause that matters.";
+  "This is not just a hackathon. It’s a place where normal rules don't apply and limits disappear. A space where builders, dreamers, and problem-solvers come together to celebrate the art of creation, share ideas, and turn code into lasting, real-world impact for a cause that matters.";
 
 export default function StorySection({
   quote = DEFAULT_QUOTE,
@@ -531,7 +531,7 @@ export default function StorySection({
       render(targetProgress);
 
       // Both timers fire while the page is hidden (opacity:0, locked until 1150ms by SmoothScroll).
-      // They ONLY refresh ScrollTrigger's position measurements — scroll-to-top is handled
+      // They ONLY refresh ScrollTrigger's position measurements, scroll-to-top is handled
       // exclusively by SmoothScroll to avoid race conditions.
       const refreshTimer1 = setTimeout(() => {
         ScrollTrigger.refresh();
@@ -558,12 +558,12 @@ export default function StorySection({
   }, [words.length]);
 
   return (
-    <section id="story" ref={containerRef} className="relative w-full h-[850vh] bg-white">
+    <section id="story" ref={containerRef} className="relative w-full h-[850vh] bg-[#0B0D10]">
       <div className="sticky top-0 h-dvh w-full overflow-hidden bg-black [transform:translateZ(0)]">
         {/* Layer 1: Hardware-Accelerated Crossfading Backgrounds */}
         <div
           ref={bgWhiteRef}
-          className="absolute inset-0 bg-white z-[1] pointer-events-none transition-opacity duration-300 [transform:translateZ(0)]"
+          className="absolute inset-0 bg-[#0B0D10] z-[1] pointer-events-none transition-opacity duration-300 [transform:translateZ(0)]"
           aria-hidden="true"
         />
         <div
@@ -603,7 +603,7 @@ export default function StorySection({
             ref={quoteRef}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] sm:w-[85%] md:w-[90%] lg:w-[92%] max-w-[58rem] md:max-w-[64rem] lg:max-w-[70rem] z-[25] pointer-events-none opacity-1 [transform-origin:center] will-change-transform"
           >
-            <p className="font-sans font-light text-[clamp(1.6rem,4.8vw,2.15rem)] md:text-[clamp(2.1rem,3.4vw,2.85rem)] lg:text-[clamp(2.65rem,2.8vw,3.35rem)] xl:text-[clamp(2.95rem,2.5vw,3.75rem)] leading-[1.32] md:leading-[1.28] tracking-tight text-[#13171B] text-justify [text-align:justify] [text-align-last:left]">
+            <p className="font-sans font-light text-[clamp(1.6rem,4.8vw,2.15rem)] md:text-[clamp(2.1rem,3.4vw,2.85rem)] lg:text-[clamp(2.65rem,2.8vw,3.35rem)] xl:text-[clamp(2.95rem,2.5vw,3.75rem)] leading-[1.32] md:leading-[1.28] tracking-tight text-[#F2F4F7] text-justify [text-align:justify] [text-align-last:left]">
               {words.map((word, i) => (
                 <React.Fragment key={`${word}-${i}`}>
                   <span
@@ -630,7 +630,7 @@ export default function StorySection({
             ref={thisIsRef}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[25] pointer-events-none text-center whitespace-nowrap opacity-0 [transform-origin:center] will-change-transform"
           >
-            <h2 className="font-sans font-light text-[clamp(2.4rem,8vw,3.5rem)] md:text-[clamp(3.5rem,7vw,5.5rem)] lg:text-[clamp(5.5rem,6.5vw,7.5rem)] leading-none tracking-tight text-[#13171B]">
+            <h2 className="font-sans font-light text-[clamp(2.4rem,8vw,3.5rem)] md:text-[clamp(3.5rem,7vw,5.5rem)] lg:text-[clamp(5.5rem,6.5vw,7.5rem)] leading-none tracking-tight text-[#F2F4F7]">
               This is...
             </h2>
           </div>
@@ -654,7 +654,7 @@ export default function StorySection({
         {/* Step 4A: Soft Dreamy Cloud Mist Ambience (covers video with feathered fog bloom) */}
         <div
           ref={deepWhiteWaveRef}
-          className="absolute inset-0 bg-white pointer-events-none z-[60] [transform:translateZ(0)]"
+          className="absolute inset-0 bg-[#0B0D10] pointer-events-none z-[60] [transform:translateZ(0)]"
           style={{
             transform: 'translate3d(0, 105%, 0)',
             boxShadow: '0 -100px 180px 90px #ffffff, 0 -40px 90px 30px #ffffff',
@@ -672,7 +672,7 @@ export default function StorySection({
         {/* Step 4C: Direct Footer Cloudy Fog Dissolve (z-[70]) */}
         <div
           ref={whiteCoverRef}
-          className="absolute inset-0 bg-white pointer-events-none z-[70] opacity-0 [transform:translateZ(0)] overflow-y-auto will-change-[opacity,filter,transform]"
+          className="absolute inset-0 bg-[#0B0D10] pointer-events-none z-[70] opacity-0 [transform:translateZ(0)] overflow-y-auto will-change-[opacity,filter,transform]"
           style={{ opacity: 0 }}
         >
           <Footer />

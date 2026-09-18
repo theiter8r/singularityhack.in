@@ -2,13 +2,24 @@
 
 import React from 'react';
 import ScrollExpand from '../components/ScrollExpand';
+import { PAST_EDITION } from '@/lib/event';
+
+/** Verified results from the previous edition. Never presented as 2.0 promises. */
+const PAST_STATS = [
+  { value: PAST_EDITION.prizePool, label: 'Prize pool' },
+  { value: PAST_EDITION.participants, label: 'Participants' },
+  { value: PAST_EDITION.teams, label: 'Teams' },
+  { value: PAST_EDITION.projects, label: 'Projects shipped' },
+];
 
 export default function PastEditionSection() {
   return (
-    <section id="past-editions" className="relative w-full bg-white">
+    <section id="past-editions" className="relative w-full bg-[#0B0D10]">
       {/* 1. Expandable Image Component with "Our Glory" headline */}
       <ScrollExpand
-        src="/images/temp.png"
+        src="/videos/glory.mp4"
+        mediaType="video"
+        poster="/images/glory-poster.jpg"
         alt="Our Glory"
         title="Our Glory"
         useWindowScroll={true}
@@ -26,52 +37,35 @@ export default function PastEditionSection() {
       />
 
       {/* 2. Content & Numbers After The Image Component */}
-      <div className="relative w-full py-[8vh] px-[4vw] md:py-[10vh] md:px-[5vw] lg:py-[12vh] lg:px-[6vw] bg-white">
+      <div className="relative w-full py-[8vh] px-[4vw] md:py-[10vh] md:px-[5vw] lg:py-[12vh] lg:px-[6vw] bg-[#0B0D10]">
         <div className="mx-auto w-full max-w-[92vw] md:max-w-[82vw] lg:max-w-[66rem]">
           {/* Narrative Paragraph */}
-          <p className="text-[clamp(0.95rem,2.4vw,1.1rem)] md:text-[clamp(1.1rem,1.8vw,1.22rem)] lg:text-[clamp(1.22rem,1.35vw,1.3rem)] text-[#222222] font-light leading-[1.8] md:leading-[1.85] tracking-[-0.01em] mb-[3rem] md:mb-[4.5rem] lg:mb-[5.5rem]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <p className="text-[clamp(0.95rem,2.4vw,1.1rem)] md:text-[clamp(1.1rem,1.8vw,1.22rem)] lg:text-[clamp(1.22rem,1.35vw,1.3rem)] text-[#C2C7CE] font-light leading-[1.8] md:leading-[1.85] tracking-[-0.01em] mb-[3rem] md:mb-[4.5rem] lg:mb-[5.5rem]">
+            Singularity 1.0 started as a simple bet: give students a room, a deadline, and no
+            template, and they will build things nobody asked permission for. Over 400 participants
+            took it, forming 120+ teams that went from an empty repository to a working demo in a
+            single sitting. Every one of those teams shipped something. Singularity 2.0 is the same
+            bet, scaled up.
           </p>
 
           {/* Metrics / Numbers Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-[1.5rem] md:gap-[2.5rem] lg:gap-[3.5rem] text-center">
-            <div>
-              <div className="text-[clamp(2.5rem,6vw,3.25rem)] md:text-[clamp(3.25rem,4.5vw,4.25rem)] lg:text-[clamp(4.25rem,4vw,5rem)] text-[#13171B] font-normal tracking-tight mb-[0.5rem] leading-none">
-                25H
+            {PAST_STATS.map((stat) => (
+              <div key={stat.label}>
+                <div className="text-[clamp(2.5rem,6vw,3.25rem)] md:text-[clamp(3.25rem,4.5vw,4.25rem)] lg:text-[clamp(4.25rem,4vw,5rem)] text-[#F2F4F7] font-normal tracking-tight mb-[0.5rem] leading-none">
+                  {stat.value}
+                </div>
+                <div className="text-[clamp(0.65rem,0.8vw,0.75rem)] font-semibold uppercase tracking-[0.22em] text-[#8A9099]">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-[clamp(0.65rem,0.8vw,0.75rem)] font-semibold uppercase tracking-[0.22em] text-[#777777]">
-                Non-stop coding
-              </div>
-            </div>
-
-            <div>
-              <div className="text-[clamp(2.5rem,6vw,3.25rem)] md:text-[clamp(3.25rem,4.5vw,4.25rem)] lg:text-[clamp(4.25rem,4vw,5rem)] text-[#13171B] font-normal tracking-tight mb-[0.5rem] leading-none">
-                4.1K+
-              </div>
-              <div className="text-[clamp(0.65rem,0.8vw,0.75rem)] font-semibold uppercase tracking-[0.22em] text-[#777777]">
-                Global registrations
-              </div>
-            </div>
-
-            <div>
-              <div className="text-[clamp(2.5rem,6vw,3.25rem)] md:text-[clamp(3.25rem,4.5vw,4.25rem)] lg:text-[clamp(4.25rem,4vw,5rem)] text-[#13171B] font-normal tracking-tight mb-[0.5rem] leading-none">
-                ₹140k+
-              </div>
-              <div className="text-[clamp(0.65rem,0.8vw,0.75rem)] font-semibold uppercase tracking-[0.22em] text-[#777777]">
-                Prize pool
-              </div>
-            </div>
-
-            <div>
-              <div className="text-[clamp(2.5rem,6vw,3.25rem)] md:text-[clamp(3.25rem,4.5vw,4.25rem)] lg:text-[clamp(4.25rem,4vw,5rem)] text-[#13171B] font-normal tracking-tight mb-[0.5rem] leading-none">
-                55
-              </div>
-              <div className="text-[clamp(0.65rem,0.8vw,0.75rem)] font-semibold uppercase tracking-[0.22em] text-[#777777]">
-                Top finalists
-              </div>
-            </div>
+            ))}
           </div>
 
+          {/* Attribution so these numbers are never read as 2.0 guarantees */}
+          <p className="mt-[2rem] md:mt-[2.75rem] text-center text-[clamp(0.65rem,0.8vw,0.75rem)] font-semibold uppercase tracking-[0.22em] text-[#F2F4F7]/40">
+            Results from {PAST_EDITION.label}
+          </p>
         </div>
       </div>
     </section>

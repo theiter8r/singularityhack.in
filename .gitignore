@@ -17,3 +17,6 @@ pnpm-debug.log*
 components.json
 vercel.json
 public/story-girl_frames/
+
+# macOS
+.DS_Store

@@ -12,8 +12,15 @@ const quicksand = Quicksand({
 });
 
 export const metadata = {
-  title: 'Singularity',
-  description: 'Next.js sample project with Tailwind CSS',
+  title: 'Singularity 2.0 | National-Level Hackathon at K.C. College, Thane',
+  description:
+    'An 18-hour offline hackathon sprint on 19–20 December 2026 at K.C. College of Engineering & Management Studies, Thane. Teams of 2–4, ₹40,000 prize pool, four tracks: AI-Enabled Hardware, Health & Emergency Services, FinTech, and Environmental. Register on Unstop by 20 November.',
+  openGraph: {
+    title: 'Singularity 2.0 | National-Level Hackathon',
+    description:
+      'An 18-hour offline sprint at K.C. College, Thane. Teams of 2–4. ₹40,000 prize pool. Registrations close 20 November 2026.',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

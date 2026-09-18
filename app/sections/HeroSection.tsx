@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import FullScreenMenu from '../components/FullScreenMenu';
 import { OriginButton } from '@/components/ui/origin-button';
+import { UnstopLogo } from '@/components/ui/unstop-logo';
+import { UNSTOP_URL } from '@/lib/event';
 
 interface HeroSectionProps {
   onOpenMenu?: (e?: React.MouseEvent<HTMLElement>) => void;
@@ -34,7 +36,7 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
   }, []);
 
   return (
-    <section className="relative w-full h-[100dvh] min-h-[540px] pt-[1vw] px-[1vw] pb-[1vw] bg-white select-none overflow-hidden">
+    <section className="relative w-full h-[100dvh] min-h-[540px] pt-[1vw] px-[1vw] pb-[1vw] bg-[#0B0D10] select-none overflow-hidden">
       {/* Main Full-Screen Canvas with Smooth Rounded Corners on TL & BR */}
       <div
         style={
@@ -44,7 +46,7 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
             '--notch-bot-h': 'calc(var(--frame-border) * 110 / 14)',
           } as React.CSSProperties
         }
-        className="relative w-full h-full rounded-tl-[clamp(1.2rem,2.8vw,2.75rem)] rounded-br-[clamp(1.2rem,2.8vw,2.75rem)] rounded-tr-none rounded-bl-none overflow-hidden bg-white"
+        className="relative w-full h-full rounded-tl-[clamp(1.2rem,2.8vw,2.75rem)] rounded-br-[clamp(1.2rem,2.8vw,2.75rem)] rounded-tr-none rounded-bl-none overflow-hidden bg-[#0B0D10]"
       >
         {/* Central Background Video - Desktop */}
         <video
@@ -82,25 +84,25 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
         {/* SEAMLESS PURE WHITE PERIMETER FRAME & CORNER FILLETS                     */}
         {/* ========================================================================= */}
         {/* Top Border */}
-        <div className="pointer-events-none absolute top-0 left-0 right-0 h-[var(--frame-border)] bg-white z-30" />
+        <div className="pointer-events-none absolute top-0 left-0 right-0 h-[var(--frame-border)] bg-[#0B0D10] z-30" />
         {/* Bottom Border */}
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-[var(--frame-border)] bg-white z-30" />
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-[var(--frame-border)] bg-[#0B0D10] z-30" />
         {/* Left Border */}
-        <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-[var(--frame-border)] bg-white z-30" />
+        <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-[var(--frame-border)] bg-[#0B0D10] z-30" />
         {/* Right Border */}
-        <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-[var(--frame-border)] bg-white z-30" />
+        <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-[var(--frame-border)] bg-[#0B0D10] z-30" />
 
         {/* Top-Left Video Corner Fillet (Rounds the video inside the frame) */}
         <div className="pointer-events-none absolute top-[var(--frame-border)] left-[var(--frame-border)] w-[clamp(28px,3vw,48px)] h-[clamp(28px,3vw,48px)] z-30">
           <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <path d="M0 0 H44 C19.699 0 0 19.699 0 44 Z" fill="#ffffff" />
+            <path d="M0 0 H44 C19.699 0 0 19.699 0 44 Z" fill="#0B0D10" />
           </svg>
         </div>
 
         {/* Bottom-Right Video Corner Fillet (Rounds the video inside the frame) */}
         <div className="pointer-events-none absolute bottom-[var(--frame-border)] right-[var(--frame-border)] w-[clamp(28px,3vw,48px)] h-[clamp(28px,3vw,48px)] z-30">
           <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <path d="M44 44 H0 C24.301 44 44 24.301 44 0 Z" fill="#ffffff" />
+            <path d="M44 44 H0 C24.301 44 44 24.301 44 0 Z" fill="#0B0D10" />
           </svg>
         </div>
 
@@ -130,12 +132,12 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
               className="w-full h-full"
             >
               {/* Smooth S-curve transition from 14px top border down to 82px button bar */}
-              <path d="M0 0 H96 V82 C48 82 48 14 0 14 Z" fill="#ffffff" />
+              <path d="M0 0 H96 V82 C48 82 48 14 0 14 Z" fill="#0B0D10" />
             </svg>
           </div>
 
           {/* Solid White Cutout Content Area */}
-          <div className="relative bg-white h-[var(--notch-top-h)] pl-1.5 sm:pl-2.5 pr-[clamp(0.75rem,1.8vw,2.25rem)] flex items-center">
+          <div className="relative bg-[#0B0D10] h-[var(--notch-top-h)] pl-1.5 sm:pl-2.5 pr-[clamp(0.75rem,1.8vw,2.25rem)] flex items-center">
             {/* Buttons Group */}
             <div className="flex items-center gap-[clamp(0.5rem,1vw,1rem)]">
               {/* Social Icons (Desktop & Tablet only to prevent mobile header collision) */}
@@ -146,7 +148,7 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="group flex h-[clamp(2.25rem,2.8vw,2.8rem)] w-[clamp(2.25rem,2.8vw,2.8rem)] items-center justify-center rounded-full border-2 border-white bg-white text-[#13171B] shadow-[0_4px_14px_rgba(0,0,0,0.12)] transition-all duration-200 hover:scale-110 hover:shadow-[0_6px_20px_rgba(0,0,0,0.18)] cursor-pointer"
+                  className="group flex h-[clamp(2.25rem,2.8vw,2.8rem)] w-[clamp(2.25rem,2.8vw,2.8rem)] items-center justify-center rounded-full border-2 border-[#0B0D10] bg-[#0B0D10] text-[#F2F4F7] shadow-[0_4px_14px_rgba(0,0,0,0.12)] transition-all duration-200 hover:scale-110 hover:shadow-[0_6px_20px_rgba(0,0,0,0.18)] cursor-pointer"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -169,7 +171,7 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="group flex h-[clamp(2.25rem,2.8vw,2.8rem)] w-[clamp(2.25rem,2.8vw,2.8rem)] items-center justify-center rounded-full border-2 border-white bg-white text-[#13171B] shadow-[0_4px_14px_rgba(0,0,0,0.12)] transition-all duration-200 hover:scale-110 hover:shadow-[0_6px_20px_rgba(0,0,0,0.18)] cursor-pointer"
+                  className="group flex h-[clamp(2.25rem,2.8vw,2.8rem)] w-[clamp(2.25rem,2.8vw,2.8rem)] items-center justify-center rounded-full border-2 border-[#0B0D10] bg-[#0B0D10] text-[#F2F4F7] shadow-[0_4px_14px_rgba(0,0,0,0.12)] transition-all duration-200 hover:scale-110 hover:shadow-[0_6px_20px_rgba(0,0,0,0.18)] cursor-pointer"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -186,13 +188,13 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
                 type="button"
                 onClick={(e) => (onOpenMenu ? onOpenMenu(e) : setIsMenuOpen((prev) => !prev))}
                 aria-label="Explore Menu"
-                className="group flex h-[clamp(2.25rem,2.8vw,2.8rem)] w-[clamp(6.75rem,8.8vw,8.75rem)] items-center justify-between rounded-full border-2 border-white bg-white pl-[clamp(0.85rem,1.3vw,1.375rem)] pr-[clamp(0.35rem,0.5vw,0.5rem)] text-[#13171B] shadow-[0_4px_14px_rgba(0,0,0,0.12)] transition-all duration-200 hover:shadow-[0_6px_20px_rgba(0,0,0,0.18)] cursor-pointer"
+                className="group flex h-[clamp(2.25rem,2.8vw,2.8rem)] w-[clamp(6.75rem,8.8vw,8.75rem)] items-center justify-between rounded-full border-2 border-[#0B0D10] bg-[#0B0D10] pl-[clamp(0.85rem,1.3vw,1.375rem)] pr-[clamp(0.35rem,0.5vw,0.5rem)] text-[#F2F4F7] shadow-[0_4px_14px_rgba(0,0,0,0.12)] transition-all duration-200 hover:shadow-[0_6px_20px_rgba(0,0,0,0.18)] cursor-pointer"
               >
-                <span className="font-seasonmix text-[clamp(0.85rem,1vw,1rem)] tracking-[-0.03em] text-[#13171B] group-hover:text-black transition-colors select-none">
+                <span className="font-seasonmix text-[clamp(0.85rem,1vw,1rem)] tracking-[-0.03em] text-[#F2F4F7] group-hover:text-[#F2F4F7] transition-colors select-none">
                   Explore
                 </span>
                 
-                <div className="flex h-[clamp(1.75rem,2vw,2.125rem)] w-[clamp(1.75rem,2vw,2.125rem)] items-center justify-center rounded-full bg-[#13171B] text-white transition-transform duration-300 group-hover:rotate-45">
+                <div className="flex h-[clamp(1.75rem,2vw,2.125rem)] w-[clamp(1.75rem,2vw,2.125rem)] items-center justify-center rounded-full bg-[#F2F4F7] text-[#0B0D10] transition-transform duration-300 group-hover:rotate-45">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -214,7 +216,7 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
         {/* Inner Concave Fillet below Top-Right Notch */}
         <div className="pointer-events-none absolute top-[var(--notch-top-h)] right-[var(--frame-border)] w-[clamp(20px,2vw,36px)] h-[clamp(20px,2vw,36px)] z-20">
           <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <path d="M36 0 V36 C36 16.118 19.882 0 0 0 Z" fill="#ffffff" />
+            <path d="M36 0 V36 C36 16.118 19.882 0 0 0 Z" fill="#0B0D10" />
           </svg>
         </div>
 
@@ -233,39 +235,39 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
         {/* ========================================================================= */}
         <div className="absolute bottom-0 left-0 z-30 flex items-end">
           {/* Solid White Cutout Content Area for Stats */}
-          <div className="relative bg-white h-[var(--notch-bot-h)] pl-[clamp(1rem,2vw,2.25rem)] pr-2 sm:pr-3 md:pr-4 flex items-center">
+          <div className="relative bg-[#0B0D10] h-[var(--notch-bot-h)] pl-[clamp(1rem,2vw,2.25rem)] pr-2 sm:pr-3 md:pr-4 flex items-center">
             {/* Outlined Pill Container around countdown timer */}
-            <div className="inline-flex items-center gap-[clamp(0.8rem,1.8vw,2.5rem)] rounded-full border border-black bg-white px-[clamp(0.95rem,1.8vw,2.25rem)] py-[clamp(0.5rem,0.8vw,0.75rem)] shadow-sm">
+            <div className="inline-flex items-center gap-[clamp(0.8rem,1.8vw,2.5rem)] rounded-full border border-[#F2F4F7]/25 bg-[#0B0D10] px-[clamp(0.95rem,1.8vw,2.25rem)] py-[clamp(0.5rem,0.8vw,0.75rem)] shadow-sm">
               {/* Days Column */}
               <div className="flex flex-col items-center gap-0.5 min-w-[clamp(2.1rem,3.2vw,3.5rem)]">
-                <span className="font-serif italic text-[clamp(1.45rem,2.2vw,2rem)] font-medium tracking-tight text-[#13171B] tabular-nums leading-none">
+                <span className="font-serif italic text-[clamp(1.45rem,2.2vw,2rem)] font-medium tracking-tight text-[#F2F4F7] tabular-nums leading-none">
                   {String(timeLeft.days).padStart(2, '0')}
                 </span>
-                <span className="text-[clamp(0.58rem,0.68vw,0.6875rem)] uppercase tracking-wider text-[#13171B]/70 font-bold">
+                <span className="text-[clamp(0.58rem,0.68vw,0.6875rem)] uppercase tracking-wider text-[#F2F4F7]/70 font-bold">
                   Days
                 </span>
               </div>
 
-              <span className="font-serif italic text-[clamp(1.1rem,1.6vw,1.45rem)] font-normal text-[#13171B]/40 -mt-1">:</span>
+              <span className="font-serif italic text-[clamp(1.1rem,1.6vw,1.45rem)] font-normal text-[#F2F4F7]/40 -mt-1">:</span>
 
               {/* Hours Column */}
               <div className="flex flex-col items-center gap-0.5 min-w-[clamp(2.1rem,3.2vw,3.5rem)]">
-                <span className="font-serif italic text-[clamp(1.45rem,2.2vw,2rem)] font-medium tracking-tight text-[#13171B] tabular-nums leading-none">
+                <span className="font-serif italic text-[clamp(1.45rem,2.2vw,2rem)] font-medium tracking-tight text-[#F2F4F7] tabular-nums leading-none">
                   {String(timeLeft.hours).padStart(2, '0')}
                 </span>
-                <span className="text-[clamp(0.58rem,0.68vw,0.6875rem)] uppercase tracking-wider text-[#13171B]/70 font-bold">
+                <span className="text-[clamp(0.58rem,0.68vw,0.6875rem)] uppercase tracking-wider text-[#F2F4F7]/70 font-bold">
                   Hours
                 </span>
               </div>
 
-              <span className="font-serif italic text-[clamp(1.1rem,1.6vw,1.45rem)] font-normal text-[#13171B]/40 -mt-1">:</span>
+              <span className="font-serif italic text-[clamp(1.1rem,1.6vw,1.45rem)] font-normal text-[#F2F4F7]/40 -mt-1">:</span>
 
               {/* Minutes Column */}
               <div className="flex flex-col items-center gap-0.5 min-w-[clamp(2.1rem,3.2vw,3.5rem)]">
-                <span className="font-serif italic text-[clamp(1.45rem,2.2vw,2rem)] font-medium tracking-tight text-[#13171B] tabular-nums leading-none">
+                <span className="font-serif italic text-[clamp(1.45rem,2.2vw,2rem)] font-medium tracking-tight text-[#F2F4F7] tabular-nums leading-none">
                   {String(timeLeft.minutes).padStart(2, '0')}
                 </span>
-                <span className="text-[clamp(0.58rem,0.68vw,0.6875rem)] uppercase tracking-wider text-[#13171B]/70 font-bold">
+                <span className="text-[clamp(0.58rem,0.68vw,0.6875rem)] uppercase tracking-wider text-[#F2F4F7]/70 font-bold">
                   Min
                 </span>
               </div>
@@ -281,7 +283,7 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
               className="w-full h-full"
             >
               {/* Smooth S-curve transition from 110px stats bar down to 14px bottom border */}
-              <path d="M0 110 H110 V96 C55 96 55 0 0 0 Z" fill="#ffffff" />
+              <path d="M0 110 H110 V96 C55 96 55 0 0 0 Z" fill="#0B0D10" />
             </svg>
           </div>
         </div>
@@ -289,31 +291,30 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
         {/* Inner Concave Fillet above Bottom-Left Notch where stats bar meets left border */}
         <div className="pointer-events-none absolute bottom-[var(--notch-bot-h)] left-[var(--frame-border)] w-[clamp(20px,2vw,36px)] h-[clamp(20px,2vw,36px)] z-20">
           <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <path d="M0 36 V0 C0 19.882 16.118 36 36 36 Z" fill="#ffffff" />
+            <path d="M0 36 V0 C0 19.882 16.118 36 36 36 Z" fill="#0B0D10" />
           </svg>
         </div>
 
         {/* ========================================================================= */}
         {/* BOTTOM-RIGHT: Floating Translucent Glass Card                              */}
         {/* ========================================================================= */}
-        <div className="absolute bottom-[clamp(6.2rem,10vh,3rem)] sm:bottom-[clamp(1.5rem,2.2vw,2.25rem)] right-[clamp(0.8rem,2vw,2.25rem)] z-20 w-[clamp(14rem,24vw,24rem)] max-w-[calc(100vw-3rem)] rounded-[clamp(1rem,1.8vw,1.5rem)] bg-[#121316]/70 backdrop-blur-xl border border-white/15 p-[clamp(0.85rem,1.4vw,1.5rem)] shadow-[0_16px_36px_rgba(0,0,0,0.5)] space-y-[clamp(0.5rem,0.8vw,0.875rem)] transition-all duration-300 hover:border-white/30 hover:bg-[#121316]/80">
+        <div className="absolute bottom-[clamp(6.2rem,10vh,3rem)] sm:bottom-[clamp(1.5rem,2.2vw,2.25rem)] right-[clamp(0.8rem,2vw,2.25rem)] z-20 w-[clamp(14rem,24vw,24rem)] max-w-[calc(100vw-3rem)] rounded-[clamp(1rem,1.8vw,1.5rem)] bg-[#121316]/70 backdrop-blur-xl border border-[#0B0D10]/15 p-[clamp(0.85rem,1.4vw,1.5rem)] shadow-[0_16px_36px_rgba(0,0,0,0.5)] space-y-[clamp(0.5rem,0.8vw,0.875rem)] transition-all duration-300 hover:border-[#0B0D10]/30 hover:bg-[#121316]/80">
           {/* Card Description */}
           <p className="text-[clamp(0.72rem,0.85vw,0.8125rem)] text-white/80 leading-relaxed font-sans">
-            Register today to join a community of builders, experiment freely, and turn wild ideas into real impact.
+            An 18-hour offline sprint at K.C. College, Thane. Register your team of 2–4 before 20 November and build something that ships.
           </p>
 
           {/* Card Action: Register Button */}
           <div className="pt-0.5">
             <OriginButton
-              onClick={() => {
-                const el = document.getElementById('timeline-section') || document.getElementById('story-section');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              fillColor="#0030CF"
-              fillTextColor="#ffffff"
-              className="h-[clamp(2.2rem,2.8vw,2.75rem)] w-full rounded-full bg-white text-[#13171B] font-seasonmix font-normal text-[clamp(0.88rem,1vw,1.05rem)] tracking-[-0.02em] shadow-md border-0"
+              onClick={() => window.open(UNSTOP_URL, '_blank', 'noopener,noreferrer')}
+              aria-label="Register for Singularity 2.0 on Unstop (opens in a new tab)"
+              fillColor="#E3C77E"
+              fillTextColor="#0B0D10"
+              className="h-[clamp(2.2rem,2.8vw,2.75rem)] w-full rounded-full bg-[#F2F4F7] text-[#0B0D10] font-seasonmix font-normal text-[clamp(0.88rem,1vw,1.05rem)] tracking-[-0.02em] shadow-md border-0"
             >
-              Register on Unstop
+              <span>Register on</span>
+              <UnstopLogo className="h-[clamp(1.05rem,1.2vw,1.3rem)] w-auto" />
             </OriginButton>
           </div>
         </div>

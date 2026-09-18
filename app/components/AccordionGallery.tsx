@@ -128,7 +128,9 @@ const AccordionGallery = ({
         if (media) {
           const drift = Math.max(-1.5, Math.min(1.5, active - i));
           const shift = drift * parallax * mediaSize * 0.06;
-          const gray = grayscale ? (isActive ? 0 : 1) : 0;
+          // Partial desaturation: the inactive panels still recede, but the
+          // artwork keeps its colour identity instead of going flat grey.
+          const gray = grayscale ? (isActive ? 0 : 0.55) : 0;
           tl.to(
             media,
             {
@@ -256,7 +258,7 @@ const AccordionGallery = ({
               <div className="ag-panel__overlay" aria-hidden="true" />
             </div>
 
-            {/* Track eyebrow tag — always visible */}
+            {/* Track eyebrow tag, always visible */}
             {item.tag && (
               <div className="ag-panel__tag" aria-hidden="true">
                 {item.tag}

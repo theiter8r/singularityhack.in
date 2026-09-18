@@ -42,14 +42,14 @@ function FaqItemRow({ item, isOpen, onToggle, index }: FaqItemRowProps) {
       isFirst.current = false;
       if (isOpen) {
         gsap.set(content, { height: "auto", opacity: 1 });
-        if (title)    gsap.set(title,    { color: "#0030CF" });
-        if (num)      gsap.set(num,      { color: "#0030CF", opacity: 1 });
+        if (title)    gsap.set(title,    { color: "#E3C77E" });
+        if (num)      gsap.set(num,      { color: "#E3C77E", opacity: 1 });
         if (iconWrap) gsap.set(iconWrap, { rotation: 45 });
         if (line)     gsap.set(line,     { scaleX: 1, opacity: 1 });
       } else {
         gsap.set(content, { height: 0, opacity: 0 });
-        if (title)    gsap.set(title,    { color: "#13171B" });
-        if (num)      gsap.set(num,      { color: "#13171B", opacity: 0.35 });
+        if (title)    gsap.set(title,    { color: "#F2F4F7" });
+        if (num)      gsap.set(num,      { color: "#F2F4F7", opacity: 0.35 });
         if (iconWrap) gsap.set(iconWrap, { rotation: 0 });
         if (line)     gsap.set(line,     { scaleX: 0, opacity: 0 });
       }
@@ -72,8 +72,8 @@ function FaqItemRow({ item, isOpen, onToggle, index }: FaqItemRowProps) {
           onComplete: () => gsap.set(content, { height: "auto" }),
         }
       );
-      if (title)    gsap.to(title,    { color: "#0030CF", duration: 0.35, ease: "power2.out" });
-      if (num)      gsap.to(num,      { color: "#0030CF", opacity: 1, duration: 0.35, ease: "power2.out" });
+      if (title)    gsap.to(title,    { color: "#E3C77E", duration: 0.35, ease: "power2.out" });
+      if (num)      gsap.to(num,      { color: "#E3C77E", opacity: 1, duration: 0.35, ease: "power2.out" });
       if (iconWrap) gsap.to(iconWrap, { rotation: 45, duration: 0.45, ease: "back.out(1.8)" });
       if (line)     gsap.to(line,     { scaleX: 1, opacity: 1, duration: 0.5, ease: "expo.out", delay: 0.08 });
 
@@ -85,8 +85,8 @@ function FaqItemRow({ item, isOpen, onToggle, index }: FaqItemRowProps) {
         { height: h, opacity: 1 },
         { height: 0, opacity: 0, duration: 0.38, ease: "power3.inOut" }
       );
-      if (title)    gsap.to(title,    { color: "#13171B",  duration: 0.25, ease: "power2.out" });
-      if (num)      gsap.to(num,      { color: "#13171B", opacity: 0.35, duration: 0.25, ease: "power2.out" });
+      if (title)    gsap.to(title,    { color: "#F2F4F7",  duration: 0.25, ease: "power2.out" });
+      if (num)      gsap.to(num,      { color: "#F2F4F7", opacity: 0.35, duration: 0.25, ease: "power2.out" });
       if (iconWrap) gsap.to(iconWrap, { rotation: 0, duration: 0.35, ease: "power3.out" });
       if (line)     gsap.to(line,     { scaleX: 0, opacity: 0, duration: 0.25, ease: "power2.in" });
     }
@@ -96,7 +96,7 @@ function FaqItemRow({ item, isOpen, onToggle, index }: FaqItemRowProps) {
     /* Keep Radix Item + Trigger for full ARIA correctness */
     <AccordionPrimitive.Item
       value={item.id}
-      className="border-b border-[#13171B]/10 last:border-b"
+      className="border-b border-[#F2F4F7]/10 last:border-b"
     >
       <AccordionPrimitive.Header className="flex">
         <AccordionPrimitive.Trigger
@@ -107,7 +107,7 @@ function FaqItemRow({ item, isOpen, onToggle, index }: FaqItemRowProps) {
           <p
             ref={numRef}
             className="text-xs font-mono leading-none shrink-0 transition-none"
-            style={{ color: "#13171B", opacity: 0.35 }}
+            style={{ color: "#F2F4F7", opacity: 0.35 }}
           >
             {String(index + 1).padStart(2, "0")}
           </p>
@@ -116,19 +116,19 @@ function FaqItemRow({ item, isOpen, onToggle, index }: FaqItemRowProps) {
           <h3
             ref={titleRef}
             className="font-seasonmix text-[clamp(1.6rem,3.5vw,2.8rem)] font-normal leading-none tracking-tight flex-1 transition-none"
-            style={{ color: "#13171B" }}
+            style={{ color: "#F2F4F7" }}
           >
             {item.title}
           </h3>
 
           {/* Plus icon */}
           <span ref={iconWrapRef} className="shrink-0 flex items-center justify-center w-6 h-6 transition-none">
-            <PlusIcon className="w-5 h-5 text-[#13171B]/30" strokeWidth={1.5} />
+            <PlusIcon className="w-5 h-5 text-[#F2F4F7]/30" strokeWidth={1.5} />
           </span>
         </AccordionPrimitive.Trigger>
       </AccordionPrimitive.Header>
 
-      {/* GSAP-controlled content — always mounted, height animated */}
+      {/* GSAP-controlled content, always mounted, height animated */}
       <div
         ref={contentRef}
         style={{ height: 0, overflow: "hidden", opacity: 0 }}
@@ -138,10 +138,10 @@ function FaqItemRow({ item, isOpen, onToggle, index }: FaqItemRowProps) {
           {/* Accent line */}
           <div
             ref={lineRef}
-            className="h-px w-10 bg-[#0030CF] mb-4 origin-left"
+            className="h-px w-10 bg-[#E3C77E] mb-4 origin-left"
             style={{ transform: "scaleX(0)", opacity: 0 }}
           />
-          <p className="font-sans text-[clamp(0.88rem,1.3vw,1rem)] text-[#13171B]/60 leading-relaxed max-w-[52rem] pr-4">
+          <p className="font-sans text-[clamp(0.88rem,1.3vw,1rem)] text-[#F2F4F7]/60 leading-relaxed max-w-[52rem] pr-4">
             {item.content}
           </p>
         </div>

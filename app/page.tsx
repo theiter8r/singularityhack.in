@@ -7,27 +7,27 @@ import FullScreenMenu from './components/FullScreenMenu';
 
 // Lazy load off-screen sections to drastically reduce initial JS payload and maximize Core Web Vitals
 const PastEditionSection = dynamic(() => import('./sections/PastEditionSection'), {
-  loading: () => <div className="min-h-[50vh] w-full bg-white animate-pulse" />,
+  loading: () => <div className="min-h-[50vh] w-full bg-[#0B0D10] animate-pulse" />,
 });
 
 const ThemeSection = dynamic(() => import('./sections/ThemeSection'), {
-  loading: () => <div className="min-h-[35vh] w-full bg-white animate-pulse" />,
+  loading: () => <div className="min-h-[35vh] w-full bg-[#0B0D10] animate-pulse" />,
 });
 
 const TimelineSection = dynamic(() => import('./sections/TimelineSection'), {
-  loading: () => <div className="min-h-[50vh] w-full bg-white animate-pulse" />,
+  loading: () => <div className="min-h-[50vh] w-full bg-[#0B0D10] animate-pulse" />,
 });
 
 const SponsorsSection = dynamic(() => import('./sections/SponsorsSection'), {
-  loading: () => <div className="min-h-[35vh] w-full bg-white animate-pulse" />,
+  loading: () => <div className="min-h-[35vh] w-full bg-[#0B0D10] animate-pulse" />,
 });
 
 const FaqSection = dynamic(() => import('./sections/FaqSection'), {
-  loading: () => <div className="min-h-[35vh] w-full bg-white animate-pulse" />,
+  loading: () => <div className="min-h-[35vh] w-full bg-[#0B0D10] animate-pulse" />,
 });
 
 const StorySection = dynamic(() => import('./sections/StorySection'), {
-  loading: () => <div className="min-h-[60vh] w-full bg-white animate-pulse" />,
+  loading: () => <div className="min-h-[60vh] w-full bg-[#0B0D10] animate-pulse" />,
 });
 
 export default function Home() {
@@ -58,7 +58,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-[#13171B] overflow-x-clip">
+    <main className="min-h-screen bg-[#0B0D10] text-[#F2F4F7] overflow-x-clip">
       {/* Floating Sticky Header with logo and full-screen menu trigger */}
       <Header onMenuClick={handleOpenMenu} />
 
@@ -81,24 +81,24 @@ export default function Home() {
       </div>
 
       {/* 5. Lazy-loaded Timeline Section */}
-      <div id="timeline-section" className="w-full bg-white">
+      <div id="timeline-section" className="w-full bg-[#0B0D10]">
         <TimelineSection />
       </div>
 
       {/* 6. Lazy-loaded Sponsors Section */}
-      <div id="sponsors-section" className="w-full bg-white">
+      <div id="sponsors-section" className="w-full bg-[#0B0D10]">
         <SponsorsSection />
       </div>
 
       {/* 7. Lazy-loaded FAQ Section with Accordion Gallery */}
-      <div id="faq-section" className="w-full bg-white">
+      <div id="faq-section" className="w-full bg-[#0B0D10]">
         <div className="mx-auto w-full max-w-[94vw] px-[3vw] sm:px-[4vw] lg:px-[5vw]">
           <FaqSection />
         </div>
       </div>
 
       {/* 8. Lazy-loaded Cinematic Story Section with Integrated Footer Finale */}
-      <div id="story-section" className="w-full bg-white">
+      <div id="story-section" className="w-full bg-[#0B0D10]">
         <StorySection />
       </div>
 
