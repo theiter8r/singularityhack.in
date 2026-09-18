@@ -12,14 +12,37 @@ const quicksand = Quicksand({
 });
 
 export const metadata = {
+  // Required so the generated OG/Twitter image resolves to an absolute URL.
+  metadataBase: new URL('https://singularityhack.in'),
   title: 'Singularity 2.0 | National-Level Hackathon at K.C. College, Thane',
   description:
     'An 18-hour offline hackathon sprint on 19–20 December 2026 at K.C. College of Engineering & Management Studies, Thane. Teams of 2–4, ₹40,000 prize pool, four tracks: AI-Enabled Hardware, Health & Emergency Services, FinTech, and Environmental. Register on Unstop by 20 November.',
+  keywords: [
+    'Singularity 2.0',
+    'hackathon',
+    'national level hackathon',
+    'K.C. College of Engineering',
+    'Thane',
+    'Mumbai hackathon',
+    'Unstop',
+    'AI hardware',
+    'FinTech',
+  ],
+  alternates: { canonical: '/' },
   openGraph: {
     title: 'Singularity 2.0 | National-Level Hackathon',
     description:
       'An 18-hour offline sprint at K.C. College, Thane. Teams of 2–4. ₹40,000 prize pool. Registrations close 20 November 2026.',
+    url: '/',
+    siteName: 'Singularity 2.0',
+    locale: 'en_IN',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Singularity 2.0 | National-Level Hackathon',
+    description:
+      'An 18-hour offline sprint at K.C. College, Thane. Teams of 2–4. ₹40,000 prize pool. Registrations close 20 November 2026.',
   },
 };
 
