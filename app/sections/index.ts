@@ -4,7 +4,7 @@ export { default as AboutSection } from './AboutSection';
 export { default as PastEditionSection } from './PastEditionSection';
 export { default as ThemeSection } from './ThemeSection';
 export { default as TimelineSection } from './TimelineSection';
-export { default as SponsorsSection } from './SponsorsSection';
+export { default as PartnersSection } from './PartnersSection';
 export { default as FaqSection } from './FaqSection';
 export { default as StorySection } from './StorySection';
 export { default as Footer } from './Footer';

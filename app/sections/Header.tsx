@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import FullScreenMenu from '../components/FullScreenMenu';
+import { SoundToggle } from '../components/BackgroundMusic';
 
 interface HeaderProps {
   onMenuClick?: (e?: React.MouseEvent<HTMLElement>) => void;
@@ -58,12 +59,19 @@ export default function Header({ onMenuClick }: HeaderProps) {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-40 w-full bg-transparent pointer-events-none transition-all duration-300 ${
-          isScrolled && !isFooter ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+          // `invisible` is load-bearing: the buttons inside re-enable
+          // pointer events, so a merely transparent header still swallows
+          // clicks aimed at the hero's own controls underneath it.
+          isScrolled && !isFooter
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 -translate-y-2 invisible'
         }`}
       >
         <div className="relative w-full h-[clamp(3.8rem,5vw,5.125rem)] pt-[1vw] px-[1vw] pointer-events-none select-none">
           {/* Floating Explore Action Button (Exact match to Hero Explore Button) */}
-          <div className="absolute top-[clamp(0.65rem,1.5vw,1.25rem)] right-[1vw] z-30 h-[clamp(3.8rem,5vw,5.125rem)] pr-[clamp(1rem,2vw,2.25rem)] flex items-center">
+          <div className="absolute top-[clamp(0.65rem,1.5vw,1.25rem)] right-[1vw] z-30 h-[clamp(3.8rem,5vw,5.125rem)] pr-[clamp(1rem,2vw,2.25rem)] flex items-center gap-[clamp(0.5rem,1vw,1rem)]">
+            <SoundToggle />
+
             <button
               type="button"
               onClick={handleMenuClick}

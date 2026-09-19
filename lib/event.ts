@@ -6,7 +6,8 @@
 export const UNSTOP_URL =
   'https://unstop.com/hackathons/singularity-20-kc-college-of-engineering-and-management-studies-and-research-1755564';
 
-export const SPONSOR_EMAIL = 'hello@singularityhack.in';
+/** Inbox for partnership and sponsorship enquiries. */
+export const PARTNER_EMAIL = 'hello@singularityhack.in';
 
 export const EVENT = {
   name: 'Singularity 2.0',
@@ -33,3 +34,19 @@ export const PAST_EDITION = {
   teams: '120+',
   projects: '120+',
 } as const;
+
+/**
+ * Partners backing Singularity 2.0, in billing order.
+ *
+ * `role` is the public label under the mark; `href` opens the partner's own
+ * page so the logo doubles as attribution. Add new partners here, not in the
+ * section, so the row and any future press kit stay in sync.
+ */
+export const PARTNERS = [
+  {
+    id: 'unstop',
+    name: 'Unstop',
+    role: 'Platform Partner',
+    href: 'https://unstop.com',
+  },
+] as const;

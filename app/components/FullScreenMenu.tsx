@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
+import Wordmark from './Wordmark';
 
 interface FullScreenMenuProps {
   isOpen: boolean;
@@ -152,10 +153,9 @@ export default function FullScreenMenu({
             onClick={() => handleNavigate('hero')}
             className="relative flex items-center select-none cursor-pointer h-[clamp(2.5rem,6.8vw,3.2rem)] sm:h-[clamp(2.25rem,2.8vw,2.8rem)] w-[clamp(14rem,55vw,18rem)] sm:w-[clamp(10.5rem,14vw,13.5rem)]"
           >
-            <img
-              src="/logo/logo-white.svg"
-              alt="SINGULARITY"
-              className="h-full w-auto object-contain transition-opacity hover:opacity-85"
+            <Wordmark
+              wrapperClassName="h-full items-center transition-opacity hover:opacity-85"
+              className="h-full aspect-[6.1627]"
             />
           </div>
         </div>
@@ -224,7 +224,7 @@ export default function FullScreenMenu({
       {/* ===================================================================== */}
       <footer className="w-full bg-[#0B0D10] py-4 shrink-0">
         <div className="mx-auto flex w-full items-center justify-between px-[clamp(1rem,2vw,2.25rem)] text-xs text-[#F2F4F7]/40 font-mono">
-          <span>SINGULARITY 2.0 • 2026</span>
+          <span><span className="gold-ink">SINGULARITY 2.0</span> • 2026</span>
           <span>© ALL RIGHTS RESERVED</span>
         </div>
       </footer>

@@ -58,7 +58,7 @@ export default function Footer() {
             */}
             <DitheredLogo
               imageSrc="/logo/logo-white.svg"
-              className="h-full w-full text-[#F2F4F7]"
+              className="h-full w-full text-[#E3C77E]"
               invert={false}
               gridSize={420}
               scale={6.1627}
@@ -125,7 +125,7 @@ export default function Footer() {
 
         {/* Bottom Credits */}
         <div className="mt-[2rem] md:mt-[3rem] pt-4 flex items-center justify-center text-[clamp(0.625rem,0.75vw,0.72rem)] uppercase tracking-[0.28em] text-[#F2F4F7]/55">
-          <span>&copy; 2026 Singularity</span>
+          <span>&copy; 2026 <span className="gold-ink">Singularity</span></span>
         </div>
       </div>
     </footer>

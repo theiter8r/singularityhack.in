@@ -3,6 +3,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import type { FaqItem } from '@/components/ui/accordion-05';
+import { goldName } from '@/app/components/GoldName';
 
 const Accordion05 = dynamic(
   () => import('@/components/ui/accordion-05').then((m) => m.Accordion05),
@@ -14,7 +15,9 @@ const FAQ_ITEMS: FaqItem[] = [
     id: '01',
     title: 'Who can participate?',
     content:
-      'Singularity 2.0 is open to undergraduate engineering students across India: B.Tech (4-year) and Integrated (5-year) programmes, any branch or specialisation, graduating between 2027 and 2030. You do not need to be a K.C. College student, and you do not need prior hackathon experience. Bring a team that can build.',
+      goldName(
+      'Singularity 2.0 is open to undergraduate engineering students across India: B.Tech (4-year) and Integrated (5-year) programmes, any branch or specialisation, graduating between 2027 and 2030. You do not need to be a K.C. College student, and you do not need prior hackathon experience. Bring a team that can build.'
+    ),
   },
   {
     id: '02',
@@ -32,7 +35,9 @@ const FAQ_ITEMS: FaqItem[] = [
     id: '04',
     title: 'Are there any prizes?',
     content:
-      'Singularity 2.0 carries a \u20b940,000 prize pool, and every participant who competes in the final round receives a certificate. Winners are judged on the working prototype you ship inside the 18-hour sprint, not on the pitch deck alone.',
+      goldName(
+      'Singularity 2.0 carries a \u20b940,000 prize pool, and every participant who competes in the final round receives a certificate. Winners are judged on the working prototype you ship inside the 18-hour sprint, not on the pitch deck alone.'
+    ),
   },
   {
     id: '05',

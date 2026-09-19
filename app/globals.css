@@ -37,6 +37,71 @@
   --accent: #E3C77E;    /* champagne gold */
   --accent-soft: #F3E2B4; /* pale champagne: glows, gradient stops */
   --accent-ink: #0B0D10;  /* text on a gold fill */
+
+  /* Metallic ramp for the Singularity name: shadow -> champagne -> highlight */
+  --gold-ramp: linear-gradient(
+    100deg,
+    #B8934A 0%,
+    #E3C77E 16%,
+    #FBF0D0 30%,
+    #E3C77E 44%,
+    #C9A75E 62%,
+    #EBD59A 82%,
+    #B8934A 100%
+  );
+}
+
+/* ─── The Singularity name: champagne gold with a slow specular sweep ─────── */
+
+/* Inline mentions in body copy — static ramp, keeps small text legible. */
+.gold-ink {
+  color: var(--accent);
+  background-image: var(--gold-ramp);
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Display type and the wordmark — the highlight travels across the letters. */
+.gold-lustre {
+  color: var(--accent);
+  background-image: var(--gold-ramp);
+  background-size: 260% 100%;
+  background-position: 130% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-sweep 7s linear infinite;
+}
+
+/* Same sweep, poured through the wordmark artwork instead of glyphs. */
+.gold-mark {
+  background-image: var(--gold-ramp);
+  background-size: 260% 100%;
+  background-position: 130% 0;
+  -webkit-mask-image: url('/logo/logo-white.svg');
+  mask-image: url('/logo/logo-white.svg');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  animation: gold-sweep 7s linear infinite;
+}
+
+@keyframes gold-sweep {
+  from { background-position: 130% 0; }
+  to   { background-position: -130% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gold-lustre,
+  .gold-mark {
+    animation: none;
+    background-position: 50% 0;
+  }
 }
 
 html {
@@ -97,6 +162,25 @@ body::-webkit-scrollbar {
 
 *::-webkit-scrollbar {
   display: none;
+}
+
+/* Equaliser bars on the background-music toggle */
+.bgm-bar {
+  height: 100%;
+  transform-origin: bottom;
+  animation: bgm-bar 1.05s ease-in-out infinite alternate;
+}
+
+@keyframes bgm-bar {
+  from { transform: scaleY(0.22); }
+  to   { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bgm-bar {
+    animation: none;
+    transform: scaleY(0.6);
+  }
 }
 
 /* Reusable Keyframe Animations */

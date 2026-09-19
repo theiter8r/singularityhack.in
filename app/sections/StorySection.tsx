@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Wordmark from '../components/Wordmark';
 import Footer from './Footer';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -34,6 +35,19 @@ export default function StorySection({
   const bgWhiteRef = useRef<HTMLDivElement>(null);
 
   const words = quote.split(' ');
+
+  // Landscape / portrait cut of the same 7s walk-into-the-portal clip.
+  // Resolved after mount so only the matching file is ever downloaded.
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const apply = () =>
+      setVideoSrc(mq.matches ? '/videos/bottom-vertical.mp4' : '/videos/bottom.mp4');
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -95,12 +109,12 @@ export default function StorySection({
 
     let time = 0;
 
-    // Helper to calculate target currentTime in seconds for the story girl video
+    // Helper to calculate target currentTime in seconds for the story video
     const getVideoTargetTime = (progress: number) => {
       const dur =
         video.duration && isFinite(video.duration) && video.duration > 0
           ? Math.max(0, video.duration - 0.05)
-          : 10.0;
+          : 7.0;
       if (progress <= 0.48) return 0;
       if (progress >= 0.80) return dur;
       const vp = (progress - 0.48) / (0.80 - 0.48);
@@ -358,7 +372,7 @@ export default function StorySection({
         }
       }
 
-      // Step 3: Story Girl Video Scrubbed via GSAP ScrollTrigger
+      // Step 3: Story Video Scrubbed via GSAP ScrollTrigger
       if (videoWrapperRef.current) {
         if (p < 0.48) {
           videoWrapperRef.current.style.opacity = '0';
@@ -572,7 +586,9 @@ export default function StorySection({
           aria-hidden="true"
         />
 
-        {/* Layer 2: Final Story Girl Video scrubbed via GSAP ScrollTrigger */}
+        {/* Layer 2: Final Story Video scrubbed via GSAP ScrollTrigger */}
+        {/* The video is dimmed on the element itself, not this wrapper: the
+            scroll loop owns the wrapper's filter for the end-of-story bloom. */}
         <div
           ref={videoWrapperRef}
           className="absolute inset-0 w-full h-full overflow-hidden z-[6] opacity-0 transition-opacity duration-300 [transform:translateZ(0)] pointer-events-none"
@@ -580,11 +596,11 @@ export default function StorySection({
         >
           <video
             ref={videoRef}
-            src="/videos/story-girl.mp4"
+            src={videoSrc ?? undefined}
             muted
             playsInline
             preload="auto"
-            className="absolute inset-0 w-full h-full object-cover object-center [transform:translateZ(0)] will-change-transform"
+            className="absolute inset-0 w-full h-full object-cover object-center brightness-[0.62] contrast-[1.06] [transform:translateZ(0)] will-change-transform"
           />
           {/* Subtle edge falloff into background */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_95%_85%_at_50%_50%,transparent_50%,rgba(0,0,0,0.35)_80%,#000000_98%)] pointer-events-none" />
@@ -642,10 +658,9 @@ export default function StorySection({
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-[64rem] z-40 pointer-events-none flex flex-col items-center justify-center opacity-0 [transform-origin:center] will-change-transform"
           >
             <div className="relative w-full flex justify-center items-center">
-              <img
-                src="/logo/logo-white.svg"
-                alt={wordmark}
-                className="w-full max-h-[24vh] md:max-h-[32vh] lg:max-h-[40vh] object-contain select-none drop-shadow-[0_0_2.5rem_rgba(255,255,255,0.4)]"
+              <Wordmark
+                wrapperClassName="w-full drop-shadow-[0_0_2.5rem_rgba(227,199,126,0.35)]"
+                className="w-full aspect-[6.1627] max-h-[24vh] md:max-h-[32vh] lg:max-h-[40vh]"
               />
             </div>
           </div>

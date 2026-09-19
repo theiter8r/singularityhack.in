@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import FullScreenMenu from '../components/FullScreenMenu';
+import GoldenDust from '../components/GoldenDust';
+import Wordmark from '../components/Wordmark';
+import { SoundToggle } from '../components/BackgroundMusic';
 import { OriginButton } from '@/components/ui/origin-button';
 import { UnstopLogo } from '@/components/ui/unstop-logo';
 import { UNSTOP_URL } from '@/lib/event';
@@ -58,7 +61,7 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
           {...({ fetchPriority: 'high' } as object)}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out hidden md:block"
         >
-          <source src="/videos/hero-bg-video.webm" type="video/webm" />
+          <source src="/videos/hero.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
@@ -72,13 +75,16 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
           {...({ fetchPriority: 'high' } as object)}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out block md:hidden"
         >
-          <source src="/videos/hero-bg-mobile.webm" type="video/webm" />
+          <source src="/videos/hero-vertical.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
         {/* Atmospheric subtle vignette gradient */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+
+        {/* Golden dust drifting up out of the portal (above the video, below the UI) */}
+        <GoldenDust className="z-10" />
 
         {/* ========================================================================= */}
         {/* SEAMLESS PURE WHITE PERIMETER FRAME & CORNER FILLETS                     */}
@@ -111,10 +117,9 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
         {/* ========================================================================= */}
         <div className="absolute top-[var(--frame-border)] left-0 z-30 h-[var(--notch-top-h)] pl-[clamp(0.75rem,1.8vw,2.25rem)] flex items-center">
           <div className="relative h-[clamp(2.5rem,6.8vw,3.2rem)] sm:h-[clamp(2.25rem,2.8vw,2.8rem)] w-[clamp(14rem,55vw,18rem)] sm:w-[clamp(10.5rem,14vw,13.5rem)] flex items-center select-none cursor-pointer">
-            <img
-              src="/logo/logo-white.svg"
-              alt="SINGULARITY"
-              className="h-full w-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)] transition-opacity hover:opacity-90"
+            <Wordmark
+              wrapperClassName="h-full items-center drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)] transition-opacity hover:opacity-90"
+              className="h-full aspect-[6.1627]"
             />
           </div>
         </div>
@@ -140,6 +145,9 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
           <div className="relative bg-[#0B0D10] h-[var(--notch-top-h)] pl-1.5 sm:pl-2.5 pr-[clamp(0.75rem,1.8vw,2.25rem)] flex items-center">
             {/* Buttons Group */}
             <div className="flex items-center gap-[clamp(0.5rem,1vw,1rem)]">
+              {/* Background music on/off — kept out of the desktop-only row below */}
+              <SoundToggle />
+
               {/* Social Icons (Desktop & Tablet only to prevent mobile header collision) */}
               <div className="hidden sm:flex items-center gap-2.5 sm:gap-3">
                 {/* Social Icon 1: Instagram */}

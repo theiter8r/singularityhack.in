@@ -41,11 +41,11 @@ export default function PastEditionSection() {
         <div className="mx-auto w-full max-w-[92vw] md:max-w-[82vw] lg:max-w-[66rem]">
           {/* Narrative Paragraph */}
           <p className="text-[clamp(0.95rem,2.4vw,1.1rem)] md:text-[clamp(1.1rem,1.8vw,1.22rem)] lg:text-[clamp(1.22rem,1.35vw,1.3rem)] text-[#C2C7CE] font-light leading-[1.8] md:leading-[1.85] tracking-[-0.01em] mb-[3rem] md:mb-[4.5rem] lg:mb-[5.5rem]">
-            Singularity 1.0 started as a simple bet: give students a room, a deadline, and no
+            <span className="gold-ink">Singularity 1.0</span> started as a simple bet: give students a room, a deadline, and no
             template, and they will build things nobody asked permission for. Over 400 participants
             took it, forming 120+ teams that went from an empty repository to a working demo in a
-            single sitting. Every one of those teams shipped something. Singularity 2.0 is the same
-            bet, scaled up.
+            single sitting. Every one of those teams shipped something.{' '}
+            <span className="gold-ink">Singularity 2.0</span> is the same bet, scaled up.
           </p>
 
           {/* Metrics / Numbers Grid */}
