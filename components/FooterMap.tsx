@@ -90,7 +90,7 @@ export default function FooterMap({
                   Mithbunder Rd, Kopri, Thane (E) / Manpada Campus
                 </p>
                 <div className="pt-1.5 flex items-center justify-between border-t border-[#2e2e2e] text-[0.65rem]">
-                  <span className="text-white/45 font-mono">Singularity 2.0</span>
+                  <span className="gold-ink font-mono">Singularity 2.0</span>
                   <a
                     href={mapsUrl}
                     target="_blank"

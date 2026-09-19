@@ -5,7 +5,7 @@ import AccordionGallery, { AccordionGalleryItem } from '../components/AccordionG
 
 const THEME_ITEMS: AccordionGalleryItem[] = [
   {
-    image: '/images/tracks/1.jpeg',
+    image: '/images/tracks/track1.png',
     tag: 'Track 1',
     label: 'AI-Enabled Hardware',
     description:
@@ -13,7 +13,7 @@ const THEME_ITEMS: AccordionGalleryItem[] = [
     alt: 'AI-Enabled Hardware',
   },
   {
-    image: '/images/tracks/2.png',
+    image: '/images/tracks/track2.png',
     tag: 'Track 2',
     label: 'Health & Emergency Services',
     description:
@@ -21,7 +21,7 @@ const THEME_ITEMS: AccordionGalleryItem[] = [
     alt: 'Health & Emergency Services',
   },
   {
-    image: '/images/tracks/3.png',
+    image: '/images/tracks/track3.png',
     tag: 'Track 3',
     label: 'FinTech',
     description:
@@ -29,7 +29,7 @@ const THEME_ITEMS: AccordionGalleryItem[] = [
     alt: 'FinTech',
   },
   {
-    image: '/images/tracks/4.png',
+    image: '/images/tracks/track4.png',
     tag: 'Track 4',
     label: 'Environmental',
     description:

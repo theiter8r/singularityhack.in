@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, type ReactNode } from "react";
 import { gsap } from "gsap";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { PlusIcon } from "lucide-react";
@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 export interface FaqItem {
   id: string;
   title: string;
-  content: string;
+  content: ReactNode;
 }
 
 /* ─── Single animated item ─────────────────────────────────────────────────── */
