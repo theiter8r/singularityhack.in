@@ -19,12 +19,18 @@ interface BgmState {
   /** True once the browser has refused autoplay and we're waiting on a gesture. */
   blocked: boolean;
   toggle: () => void;
+  /** Temporarily silence the track (e.g. another clip on the page needs its own audio) without touching the user's on/off preference. */
+  duck: () => void;
+  /** Undo a prior `duck`, resuming playback only if it was actually playing before. */
+  unduck: () => void;
 }
 
 const BgmContext = createContext<BgmState>({
   playing: false,
   blocked: false,
   toggle: () => {},
+  duck: () => {},
+  unduck: () => {},
 });
 
 export const useBackgroundMusic = () => useContext(BgmContext);
@@ -37,6 +43,7 @@ export function BackgroundMusicProvider({ children }: { children: React.ReactNod
   const fadeRef = useRef<number>(0);
   const [playing, setPlaying] = useState(false);
   const [blocked, setBlocked] = useState(false);
+  const duckedRef = useRef(false);
 
   /** Ramp the volume so the track slides in rather than slamming on. */
   const fadeTo = useCallback((to: number, done?: () => void) => {
@@ -47,7 +54,9 @@ export function BackgroundMusicProvider({ children }: { children: React.ReactNod
     const start = performance.now();
     const step = (now: number) => {
       const t = Math.min(1, (now - start) / FADE_MS);
-      audio.volume = from + (to - from) * t;
+      // Clamped: floating-point drift on the last step can land a hair outside
+      // [0, 1], and HTMLMediaElement throws IndexSizeError rather than saturating.
+      audio.volume = Math.min(1, Math.max(0, from + (to - from) * t));
       if (t < 1) fadeRef.current = requestAnimationFrame(step);
       else done?.();
     };
@@ -125,11 +134,28 @@ export function BackgroundMusicProvider({ children }: { children: React.ReactNod
       const audio = audioRef.current;
       if (!audio) return;
       if (document.hidden) audio.pause();
-      else if (playing) void audio.play().catch(() => {});
+      else if (playing && !duckedRef.current) void audio.play().catch(() => {});
     };
     document.addEventListener('visibilitychange', onVisibility);
     return () => document.removeEventListener('visibilitychange', onVisibility);
   }, [playing]);
+
+  // Let another piece of media on the page (e.g. a clip with its own audio)
+  // borrow the soundstage without overwriting the visitor's on/off choice.
+  const duck = useCallback(() => {
+    if (duckedRef.current || !playing) return;
+    duckedRef.current = true;
+    fadeTo(0, () => audioRef.current?.pause());
+  }, [fadeTo, playing]);
+
+  const unduck = useCallback(() => {
+    if (!duckedRef.current) return;
+    duckedRef.current = false;
+    if (!playing) return;
+    const audio = audioRef.current;
+    if (!audio) return;
+    void audio.play().then(() => fadeTo(VOLUME)).catch(() => {});
+  }, [fadeTo, playing]);
 
   const toggle = useCallback(() => {
     if (playing) {
@@ -151,7 +177,7 @@ export function BackgroundMusicProvider({ children }: { children: React.ReactNod
   }, [playing, start, stop]);
 
   return (
-    <BgmContext.Provider value={{ playing, blocked, toggle }}>
+    <BgmContext.Provider value={{ playing, blocked, toggle, duck, unduck }}>
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <audio ref={audioRef} loop preload="auto" playsInline />
       {children}

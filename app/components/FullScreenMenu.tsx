@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import Wordmark from './Wordmark';
 
 interface FullScreenMenuProps {
@@ -19,6 +20,8 @@ export default function FullScreenMenu({
     'calc(100% - clamp(4rem, 6.5vw, 6.5rem)) clamp(2rem, 3.2vw, 3rem)'
   );
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Active origin uses synchronously passed prop or fallback tracked origin
   const activeOrigin = propOrigin && propOrigin.trim() !== '' ? propOrigin : circleOrigin;
@@ -94,30 +97,51 @@ export default function FullScreenMenu({
     }
   }, [isOpen, handleClose]);
 
-  const handleNavigate = (targetId: string) => {
+  /**
+   * Links are plain hrefs so the menu works identically on every route.
+   *
+   * A `/#id` aimed at a different route goes through a full load rather than
+   * the router: the landing page's scroll-driven sections settle their measured
+   * positions behind SmoothScroll's opening curtain, and that is where the deep
+   * link is resolved. A client-side push would land after the curtain is gone
+   * and get pulled back by the sections' own ScrollTrigger refreshes.
+   */
+  const handleNavigate = (href: string) => {
     handleClose();
-    // Allow the silky circular collapse animation to complete before smooth scrolling
+    // Allow the silky circular collapse animation to complete before moving
     setTimeout(() => {
-      if (targetId === 'hero') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        const element =
-          document.getElementById(targetId) ||
-          document.getElementById(targetId.replace('-section', '')) ||
-          document.getElementById(`${targetId}-section`);
+      const hashIndex = href.indexOf('#');
+      const route = hashIndex === -1 ? href : href.slice(0, hashIndex) || '/';
+      const targetId = hashIndex === -1 ? '' : href.slice(hashIndex + 1);
 
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
+      if (route !== pathname) {
+        if (targetId) window.location.href = href;
+        else router.push(href);
+        return;
+      }
+
+      if (!targetId || targetId === 'hero') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      const element =
+        document.getElementById(targetId) ||
+        document.getElementById(targetId.replace('-section', '')) ||
+        document.getElementById(`${targetId}-section`);
+
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     }, 820);
   };
 
   const navLinks = [
-    { number: '01', label: 'About', targetId: 'about-section' },
-    { number: '02', label: 'Theme', targetId: 'theme-section' },
-    { number: '03', label: 'Timeline', targetId: 'timeline-section' },
-    { number: '04', label: 'FAQ', targetId: 'faq-section' },
+    { number: '01', label: 'About', href: '/about' },
+    { number: '02', label: 'Past Edition', href: '/pastedition' },
+    { number: '03', label: 'Theme', href: '/#theme-section' },
+    { number: '04', label: 'Timeline', href: '/#timeline-section' },
+    { number: '05', label: 'FAQ', href: '/#faq-section' },
   ];
 
   return (
@@ -150,7 +174,7 @@ export default function FullScreenMenu({
         {/* Top-Left Logo (Identical coordinates & size to Hero Section Logo) */}
         <div className="absolute top-[clamp(0.65rem,1.5vw,1.25rem)] left-[1vw] z-30 h-[clamp(3.8rem,5vw,5.125rem)] pl-[clamp(0.75rem,1.8vw,2.25rem)] flex items-center">
           <div
-            onClick={() => handleNavigate('hero')}
+            onClick={() => handleNavigate('/')}
             className="relative flex items-center select-none cursor-pointer h-[clamp(2.5rem,6.8vw,3.2rem)] sm:h-[clamp(2.25rem,2.8vw,2.8rem)] w-[clamp(14rem,55vw,18rem)] sm:w-[clamp(10.5rem,14vw,13.5rem)]"
           >
             <Wordmark
@@ -200,7 +224,7 @@ export default function FullScreenMenu({
             <button
               key={item.label}
               type="button"
-              onClick={() => handleNavigate(item.targetId)}
+              onClick={() => handleNavigate(item.href)}
               className="group flex w-full items-baseline justify-between border-b border-[#F2F4F7]/8 py-[clamp(0.65rem,1.8vh,1.35rem)] text-left transition-all duration-200 hover:pl-3 cursor-pointer"
             >
               <div className="flex items-baseline gap-[clamp(0.85rem,2vw,2.5rem)]">
