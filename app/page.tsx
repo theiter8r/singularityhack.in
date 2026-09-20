@@ -2,15 +2,11 @@
 
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Header, HeroSection, AboutSection, PartnersSection } from './sections';
+import { Header, HeroSection, AboutTeaser, PartnersSection } from './sections';
 import FullScreenMenu from './components/FullScreenMenu';
 import { BackgroundMusicProvider } from './components/BackgroundMusic';
 
 // Lazy load off-screen sections to drastically reduce initial JS payload and maximize Core Web Vitals
-const PastEditionSection = dynamic(() => import('./sections/PastEditionSection'), {
-  loading: () => <div className="min-h-[50vh] w-full bg-[#0B0D10] animate-pulse" />,
-});
-
 const ThemeSection = dynamic(() => import('./sections/ThemeSection'), {
   loading: () => <div className="min-h-[35vh] w-full bg-[#0B0D10] animate-pulse" />,
 });
@@ -65,9 +61,9 @@ export default function Home() {
           <HeroSection onOpenMenu={handleOpenMenu} />
         </div>
 
-        {/* 2. Immediate Next Section */}
+        {/* 2. Short intro — the long form lives at /about and /pastedition */}
         <div id="about-section" className="mx-auto w-full max-w-[94vw] px-[3vw] pt-[2vw] sm:px-[4vw] lg:px-[5vw]">
-          <AboutSection />
+          <AboutTeaser />
         </div>
 
         {/* 3. Partners — near the fold now, so it ships with the first chunk rather than flashing a skeleton */}
@@ -75,27 +71,24 @@ export default function Home() {
           <PartnersSection />
         </div>
 
-        {/* 4. Lazy-loaded ScrollExpand Past Edition Section */}
-        <PastEditionSection />
-
-        {/* 5. Lazy-loaded Themes Grid */}
+        {/* 4. Lazy-loaded Themes Grid */}
         <div id="theme-section" className="mx-auto w-full max-w-[94vw] px-[3vw] pb-[2vw] pt-[1.5vw] sm:px-[4vw] lg:px-[5vw]">
           <ThemeSection />
         </div>
 
-        {/* 6. Lazy-loaded Timeline Section */}
+        {/* 5. Lazy-loaded Timeline Section */}
         <div id="timeline-section" className="w-full bg-[#0B0D10]">
           <TimelineSection />
         </div>
 
-        {/* 7. Lazy-loaded FAQ Section with Accordion Gallery */}
+        {/* 6. Lazy-loaded FAQ Section with Accordion Gallery */}
         <div id="faq-section" className="w-full bg-[#0B0D10]">
           <div className="mx-auto w-full max-w-[94vw] px-[3vw] sm:px-[4vw] lg:px-[5vw]">
             <FaqSection />
           </div>
         </div>
 
-        {/* 8. Lazy-loaded Cinematic Story Section with Integrated Footer Finale */}
+        {/* 7. Lazy-loaded Cinematic Story Section with Integrated Footer Finale */}
         <div id="story-section" className="w-full bg-[#0B0D10]">
           <StorySection />
         </div>

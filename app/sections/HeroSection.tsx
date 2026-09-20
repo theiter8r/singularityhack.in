@@ -317,7 +317,7 @@ export default function HeroSection({ onOpenMenu }: HeroSectionProps) {
             <OriginButton
               onClick={() => window.open(UNSTOP_URL, '_blank', 'noopener,noreferrer')}
               aria-label="Register for Singularity 2.0 on Unstop (opens in a new tab)"
-              fillColor="#E3C77E"
+              fillColor="#B8A16D"
               fillTextColor="#0B0D10"
               className="h-[clamp(2.2rem,2.8vw,2.75rem)] w-full rounded-full bg-[#F2F4F7] text-[#0B0D10] font-seasonmix font-normal text-[clamp(0.88rem,1vw,1.05rem)] tracking-[-0.02em] shadow-md border-0"
             >

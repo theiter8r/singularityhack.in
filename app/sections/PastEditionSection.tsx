@@ -22,6 +22,7 @@ export default function PastEditionSection() {
         poster="/images/glory-poster.jpg"
         alt="Our Glory"
         title="Our Glory"
+        allowSound
         useWindowScroll={true}
         startWidth={52}
         startHeight={62}
@@ -33,6 +34,8 @@ export default function PastEditionSection() {
         titleMinOpacity={0.25}
         overlayScrim={0}
         smoothing={0.08}
+        grain
+        grainOpacity={0.15}
         className="w-full"
       />
 

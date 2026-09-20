@@ -2,6 +2,7 @@
 
 import React from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 import { UNSTOP_URL } from '@/lib/event';
 import { DitheredLogo } from '@/components/ui/dithered-logo';
 
@@ -16,11 +17,14 @@ const FooterMap = dynamic(() => import('@/components/FooterMap'), {
   ),
 });
 
+// Rooted at `/` rather than bare hashes so these resolve from any route.
 const exploreLinks = [
   { label: 'Register Now', href: UNSTOP_URL },
-  { label: 'Themes', href: '#theme-section' },
-  { label: 'Timeline', href: '#timeline-section' },
-  { label: 'FAQ', href: '#faq-section' },
+  { label: 'About', href: '/about' },
+  { label: 'Our Glory', href: '/pastedition' },
+  { label: 'Themes', href: '/#theme-section' },
+  { label: 'Timeline', href: '/#timeline-section' },
+  { label: 'FAQ', href: '/#faq-section' },
 ];
 
 const connectLinks = [
@@ -81,18 +85,34 @@ export default function Footer() {
               EXPLORE
             </p>
             <ul className="space-y-1 md:space-y-1.5 text-[clamp(1.15rem,2.8vw,1.45rem)] md:text-[clamp(1.45rem,2vw,1.85rem)] leading-[1.2]">
-              {exploreLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target={link.href.startsWith('http') ? '_blank' : undefined}
-                    rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="font-serif italic tracking-[-0.05em] text-[#F2F4F7] hover:text-[#E3C77E] transition-colors cursor-pointer inline-block"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {exploreLinks.map((link) => {
+                const className =
+                  'font-serif italic tracking-[-0.05em] text-[#F2F4F7] hover:text-[#E3C77E] transition-colors cursor-pointer inline-block';
+                return (
+                  <li key={link.label}>
+                    {/*
+                      Deep links into a landing section stay plain anchors so
+                      they trigger a full load: SmoothScroll resolves the hash
+                      while the page is still hidden, which a client-side push
+                      cannot do. Page-to-page links use the router as usual.
+                    */}
+                    {link.href.startsWith('/') && !link.href.includes('#') ? (
+                      <Link href={link.href} className={className}>
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.href}
+                        target={link.href.startsWith('http') ? '_blank' : undefined}
+                        rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className={className}
+                      >
+                        {link.label}
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </section>
 

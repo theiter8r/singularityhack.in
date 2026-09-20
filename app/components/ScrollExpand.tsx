@@ -1,8 +1,9 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
+import { useBackgroundMusic } from './BackgroundMusic';
 import './ScrollExpand.css';
 
 const clamp = (v: number, a: number, b: number): number => (v < a ? a : v > b ? b : v);
@@ -45,6 +46,12 @@ export interface ScrollExpandProps {
   useWindowScroll?: boolean;
   enabled?: boolean;
   titleMinOpacity?: number;
+  /** Overlays drifting film grain on the media, clipped to the frame. */
+  grain?: boolean;
+  /** Grain strength, 0-1. Only meaningful with `grain`. */
+  grainOpacity?: number;
+  /** Video only: shows a tap-to-unmute control and plays the clip's own audio track. */
+  allowSound?: boolean;
   children?: ReactNode;
   className?: string;
   style?: CSSProperties;
@@ -70,11 +77,16 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
   useWindowScroll = false,
   enabled = true,
   titleMinOpacity = 0.25,
+  grain = false,
+  grainOpacity = 0.07,
+  allowSound = false,
   children,
   className = '',
   style,
   ...rest
 }: ScrollExpandProps) => {
+  const { duck, unduck } = useBackgroundMusic();
+  const [soundOn, setSoundOn] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -262,6 +274,26 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
     };
   }, [applyProgress, useWindowScroll]);
 
+  const soundOnRef = useRef(soundOn);
+  soundOnRef.current = soundOn;
+
+  // If the visitor scrolls away (or the section unmounts) with the clip
+  // unmuted, hand the soundstage back to the background track.
+  useEffect(() => {
+    return () => {
+      if (soundOnRef.current) unduck();
+    };
+  }, [unduck]);
+
+  const handleSoundToggle = useCallback(() => {
+    setSoundOn((prev) => {
+      const next = !prev;
+      if (next) duck();
+      else unduck();
+      return next;
+    });
+  }, [duck, unduck]);
+
   const media =
     mediaType === 'video' ? (
       <video
@@ -270,7 +302,7 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
         src={src}
         poster={poster}
         autoPlay
-        muted
+        muted={!soundOn}
         loop
         playsInline
       />
@@ -299,6 +331,13 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
           <div ref={frameRef} className="scroll-expand__frame">
             {media}
             <div ref={scrimRef} className="scroll-expand__scrim" />
+            {grain ? (
+              <div
+                className="film-grain"
+                style={{ '--grain-opacity': grainOpacity } as CSSProperties}
+                aria-hidden="true"
+              />
+            ) : null}
             {children ? (
               <div ref={overlayRef} className="scroll-expand__overlay">
                 {children}
@@ -314,6 +353,29 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
             <div ref={hintRef} className="scroll-expand__hint">
               {scrollHint}
             </div>
+          ) : null}
+          {mediaType === 'video' && allowSound ? (
+            <button
+              type="button"
+              onClick={handleSoundToggle}
+              aria-label={soundOn ? 'Mute video' : 'Unmute video'}
+              aria-pressed={soundOn}
+              className="scroll-expand__sound"
+            >
+              {soundOn ? (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="4 9 8 9 12 5 12 19 8 15 4 15 4 9" />
+                  <path d="M16 8.5a4.5 4.5 0 0 1 0 7" />
+                  <path d="M18.5 6a8 8 0 0 1 0 12" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="4 9 8 9 12 5 12 19 8 15 4 15 4 9" />
+                  <line x1="16" y1="9" x2="22" y2="15" />
+                  <line x1="22" y1="9" x2="16" y2="15" />
+                </svg>
+              )}
+            </button>
           ) : null}
         </div>
       </div>

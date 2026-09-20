@@ -604,6 +604,9 @@ export default function StorySection({
           />
           {/* Subtle edge falloff into background */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_95%_85%_at_50%_50%,transparent_50%,rgba(0,0,0,0.35)_80%,#000000_98%)] pointer-events-none" />
+
+          {/* Sits above the falloff so it dithers that gradient too */}
+          <div className="film-grain" aria-hidden="true" />
         </div>
 
         {/* Main Content Stage */}

@@ -66,7 +66,7 @@ function hasTextContent(node: React.ReactNode): boolean {
 type OriginButtonProps = ButtonHTMLAttributesForMotion & {
   children?: React.ReactNode;
   loading?: boolean;
-  /** Fill color on hover/press. Defaults to champagne gold #E3C77E */
+  /** Fill color on hover/press. Defaults to matte gold #B8A16D */
   fillColor?: string;
   /** Text color when the fill covers the button. Defaults to ink #0B0D10 */
   fillTextColor?: string;
@@ -83,7 +83,7 @@ const OriginButton = React.forwardRef<HTMLButtonElement, OriginButtonProps>(
       disabled = false,
       loading = false,
       type = "button",
-      fillColor = "#E3C77E",
+      fillColor = "#B8A16D",
       fillTextColor = "#0B0D10",
       onBlur,
       onClick,
@@ -200,7 +200,7 @@ const OriginButton = React.forwardRef<HTMLButtonElement, OriginButtonProps>(
           "relative inline-flex h-12 cursor-pointer touch-manipulation select-none items-center justify-center overflow-hidden rounded-xl px-8 font-medium text-[15px] tracking-[-0.02em]",
           "bg-[#0B0D10] text-[#F2F4F7] shadow-sm",
           "transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E3C77E] focus-visible:ring-offset-2",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B8A16D] focus-visible:ring-offset-2",
           "disabled:pointer-events-none disabled:opacity-50",
           className
         )}
@@ -303,7 +303,7 @@ const OriginButton = React.forwardRef<HTMLButtonElement, OriginButtonProps>(
             scale: showFill && coverSize > 0 ? 1 : 0,
           }}
           aria-hidden
-          className="pointer-events-none absolute rounded-full bg-[#E3C77E] z-0"
+          className="pointer-events-none absolute rounded-full bg-[#B8A16D] z-0"
           initial={{
             scale: 0,
           }}
